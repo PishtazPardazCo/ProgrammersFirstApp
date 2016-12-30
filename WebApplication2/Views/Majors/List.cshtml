@@ -1,0 +1,37 @@
+﻿<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>كد رشته</th>
+            <th>رشته</th>
+            <th>دستورات</th>
+        </tr>
+        @{
+            foreach (var rec in Model)
+            {
+                <tr id='tr_@rec.IdMajor'>
+                    <td>@rec.IdMajor</td>
+                    <td>@rec.MajorName</td>
+                    <td>
+                        <button class="btn btn-info">
+                            <span class="glyphicon glyphicon-info-sign"></span>&nbsp;
+                            نمايش جزئيات
+                        </button>
+                        <a class="btn btn-warning" href=@Url.Action("Update","Majors",new {id=rec.IdMajor})>
+                            <span class="glyphicon glyphicon-edit"></span>&nbsp;
+                            اصــلاح
+                        </a>
+
+                        <button class="btn btn-danger" onclick="DeleteRecord(@rec.IdMajor)">
+                            <span class="glyphicon glyphicon-remove"></span>&nbsp;
+                            حذف
+                        </button>
+                    </td>
+                </tr>
+
+            }
+        }
+
+    </table>
+
+</div>
+
