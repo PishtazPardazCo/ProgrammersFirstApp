@@ -1,0 +1,43 @@
+﻿@model List<WebApplication2.Models.Major>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script>
+    function DeleteRecord(majorId) {
+        $.ajax({
+            //method: 'DELETE',
+            url: '/Majors/Delete',
+            data: { id: majorId },
+            complete: function(data) {
+                if (data.responseText == 'True') {
+                    $("#tr_" + majorId).innerHTML = "";
+                    $("#tr_" + majorId).html("");
+                }
+            }
+        });
+    }
+
+    function GetRecord() {
+        $.ajax({
+            url: '/Majors/GetData',
+            complete: function(data) {
+                $("#ListRecord").innerHTML = "";
+                $("#ListRecord").html(data.responseText);
+            }
+
+        });
+    }
+</script>
+
+
+<h2>رشته</h2>
+<button class="btn" onclick="GetRecord()">بروزرساني</button>
+
+<a class="btn btn-success btn-lg" href=@Url.Action("Add","Majors")>
+    <span class="glyphicon glyphicon-pencil"></span>&nbsp;
+    ايجاد ركورد جديد
+</a>
+<div id="ListRecord">
+    @Html.Partial("List")
+</div>
