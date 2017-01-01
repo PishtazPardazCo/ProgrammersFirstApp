@@ -34,9 +34,12 @@ namespace WebApplication2.Controllers
 
                 modelList.Add(model);
             }
+            ViewBag.ListRecord = modelList;
 
-            return PartialView("List", modelList);
+            return PartialView("List");
         }
+
+
 
         public ActionResult Index()
         {
@@ -55,7 +58,9 @@ namespace WebApplication2.Controllers
 
                 modelList.Add(model);
             }
-            return View(modelList);
+            ViewBag.ListRecord = modelList;
+
+            return View();
         }
 
         public ActionResult Add()
@@ -81,6 +86,24 @@ namespace WebApplication2.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        public bool Create(Major major)
+        {
+            if (ModelState.IsValid)
+            {
+                var model = new Major()
+                {
+                    MajorName = major.MajorName,
+                    IdMajor = major.IdMajor,
+                };
+
+                _db.Majors.Add(model);
+                _db.SaveChanges();
+
+                return true;
+            }
+            return false;
         }
 
         [HttpGet]
@@ -132,6 +155,39 @@ namespace WebApplication2.Controllers
 
                 _db.Majors.Remove(query);
                 _db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public PartialViewResult GetRecord(int? id)
+        {
+            if (id != null)
+            {
+                var query = _db.Majors.SingleOrDefault(c => c.IdMajor == id.Value);
+
+                if (query != null)
+                {
+                    return PartialView("Edit", query);
+                }
+            }
+            return null;
+        }
+
+        public bool EditSave(Major major)
+        {
+            if (ModelState.IsValid)
+            {
+                var tbl = new Major()
+                {
+                    IdMajor = major.IdMajor,
+                    MajorName = major.MajorName,
+                };
+
+                _db.Majors.Attach(tbl);
+                _db.Entry(tbl).State = EntityState.Modified;
+                _db.SaveChanges();
+
                 return true;
             }
             return false;

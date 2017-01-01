@@ -129,6 +129,11 @@
     <Content Include="Content\bootstrap-rtl.min.css" />
     <Content Include="Content\bootstrap-theme-rtl.css" />
     <Content Include="Content\bootstrap-theme-rtl.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -146,6 +151,10 @@
     <Content Include="Content\font\BMITRABOLD.ttf" />
     <Content Include="Content\font\BYEKAN.eot" />
     <Content Include="Content\font\BYEKAN.TTF" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -197,6 +206,8 @@
     <Content Include="Views\Majors\Add.cshtml" />
     <Content Include="Views\Majors\Update.cshtml" />
     <Content Include="Views\Majors\List.cshtml" />
+    <Content Include="Views\Majors\Create.cshtml" />
+    <Content Include="Views\Majors\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

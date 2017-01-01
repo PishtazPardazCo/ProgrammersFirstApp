@@ -6,7 +6,7 @@
             <th>دستورات</th>
         </tr>
         @{
-            foreach (var rec in Model)
+            foreach (var rec in ViewBag.ListRecord)
             {
                 <tr id='tr_@rec.IdMajor'>
                     <td>@rec.IdMajor</td>
@@ -20,7 +20,10 @@
                             <span class="glyphicon glyphicon-edit"></span>&nbsp;
                             اصــلاح
                         </a>
-
+                        <button class="btn btn-warning" type="button" onclick="ShowEditForm(@rec.IdMajor)">
+                            <span class="glyphicon glyphicon-edit"></span>&nbsp;
+                            اصــلاح جاوا
+                        </button>
                         <button class="btn btn-danger" onclick="DeleteRecord(@rec.IdMajor)">
                             <span class="glyphicon glyphicon-remove"></span>&nbsp;
                             حذف

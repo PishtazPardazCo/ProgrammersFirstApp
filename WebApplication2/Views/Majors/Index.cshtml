@@ -1,8 +1,18 @@
-﻿@model List<WebApplication2.Models.Major>
+﻿
 
 @{
     ViewBag.Title = "Index";
 }
+<style>
+    .divhide {
+        display: none;
+    }
+
+    .divshow {
+        display: normal;
+    }
+</style>
+
 <script>
     function DeleteRecord(majorId) {
         $.ajax({
@@ -28,16 +38,93 @@
 
         });
     }
+
+    function SaveRecord() {
+        var frm = $("#formCreate");
+
+        $.post(
+            '/Majors/Create',
+            frm.serialize(),
+            function(res) {
+                if (res == "True") {
+                    $("#ListRecord").show('slow');
+                    $("#divCreate").hide('slow');
+                    document.getElementById("formCreate").reset();
+                    GetRecord();
+                }
+            }
+        );
+    }
+
+    function ShowCreateForm() {
+        $("#ListRecord").hide('slow');
+        $("#divCreate").show('slow');
+    }
+
+    function HideCreateForm() {
+        $("#ListRecord").show('slow');
+        $("#divCreate").hide('slow');
+    }
+
+    //////////////////************
+
+    function ShowEditForm(id) {
+        $.ajax({
+            url: '/Majors/GetRecord',
+            data: { id: id },
+            complete: function(data) {
+
+                $("#divUpdate").innerHTML = "";
+                $("#divUpdate").html(data.responseText);
+
+                $("#modal-Edit").modal('show');
+            }
+
+        });
+    }
+
+    function UpdateRecord() {
+        var frm = $("#editForm");
+        
+        $.post(
+            '/Majors/EditSave',
+            frm.serialize(),
+            function (res) {
+                if (res == "True") {
+                    $("#modal-Edit").modal('hide');
+                    document.getElementById("editForm").reset();
+                    GetRecord();
+                }
+            }
+        );
+    }
 </script>
 
 
 <h2>رشته</h2>
 <button class="btn" onclick="GetRecord()">بروزرساني</button>
 
-<a class="btn btn-success btn-lg" href=@Url.Action("Add","Majors")>
+<a class="btn btn-success btn-lg" href=@Url.Action("Add", "Majors")>
     <span class="glyphicon glyphicon-pencil"></span>&nbsp;
     ايجاد ركورد جديد
 </a>
+
+
+
 <div id="ListRecord">
     @Html.Partial("List")
+
+    <button class="btn btn-success" onclick="ShowCreateForm()">اضافه كردن ركورد جديد جاوا</button>
 </div>
+
+<div id="divCreate" class="divhide">
+    @Html.Partial("Create")
+</div>
+
+<div id="divUpdate" >
+    @Html.Partial("Edit")
+</div>
+
+
+
+
